@@ -1,24 +1,34 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
-import store from 'app/redux';
-import Home from 'app/screens/Home';
-import GlobalStyle from './styles';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { Router } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
+import { Provider } from 'react-redux'
+import { ThemeProvider } from 'styled-components'
+import store, { history } from 'app/redux'
+import GlobalStyle from './styles'
+import Profile from 'app/screens/Profile'
 
 const App = () => {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={{}}>
-        <React.Fragment>
-          <GlobalStyle />
-          <Router>
-            <Route path="/" component={Home} />
-          </Router>
-        </React.Fragment>
-      </ThemeProvider>
+      <ConnectedRouter history={history}>
+        <ThemeProvider theme={{}}>
+          <React.Fragment>
+            <GlobalStyle />
+            <Router history={history}>
+              <Switch>
+                <Route
+                  exact
+                  path={['/', '/profile/:platform/:username']}
+                  component={Profile}
+                />
+              </Switch>
+            </Router>
+          </React.Fragment>
+        </ThemeProvider>
+      </ConnectedRouter>
     </Provider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

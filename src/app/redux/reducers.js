@@ -1,8 +1,13 @@
-import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
-import playerInfo from 'app/services/home/reducer';
+import { combineReducers } from 'redux'
+import { connectRouter } from 'connected-react-router'
+import { reducer as formReducer } from 'redux-form'
+import playerInfo from 'app/services/profile/reducer'
+import loaderInfo from 'app/services/loader/reducer'
 
-export default combineReducers({
-  player: playerInfo,
-  form: formReducer,
-});
+export default history =>
+  combineReducers({
+    player: playerInfo,
+    form: formReducer,
+    loader: loaderInfo,
+    router: connectRouter(history)
+  })
