@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import { reducer as playerInfo } from 'app/screens/Home/reducer-saga';
+import playerInfo from 'app/services/home/reducer';
 
 export default combineReducers({
   player: playerInfo,

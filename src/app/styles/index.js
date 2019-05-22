@@ -1,9 +1,13 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
 	html, body, #root {
-			height: 100%;
+		height: 100%;
 	}
-`;
+	
+	#root {
+	  background-color: #f0f0f0;
+	}
+`
 
-export default GlobalStyle;
+export default GlobalStyle

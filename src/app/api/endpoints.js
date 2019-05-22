@@ -1,5 +1,6 @@
-export const getUserId =
-  'https://fortnite-public-api.theapinetwork.com/prod09/users/id';
+import customAxios from './config'
 
-export const getUserStats =
-  'https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats_v2';
+export const getPlayerStat = (username, platform) =>
+  customAxios({
+    url: `/profile/${platform}/${username}`
+  })
