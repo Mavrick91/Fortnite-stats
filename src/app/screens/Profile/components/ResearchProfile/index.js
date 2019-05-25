@@ -1,7 +1,7 @@
-import Home from './Home'
-import { compose } from 'recompose'
+import ResearchProfile from './ResearchProfile'
 import { reduxForm } from 'redux-form'
-import { getUserIdPlayer } from 'app/services/home/action'
+import { compose } from 'recompose'
+import { withRouter } from 'react-router-dom'
 
 const validate = values =>
   Object.keys(values).reduce((acc, key) => {
@@ -17,15 +17,15 @@ const validate = values =>
     return acc
   }, {})
 
-const onSubmit = (value, dispatch, props) => {
-  dispatch(getUserIdPlayer({ ...value, formId: props.form }))
-}
+const onSubmit = ({ platform, username }, _, props) =>
+  props.history.push(`/profile/${platform}/${username}`)
 
 export default compose(
+  withRouter,
   reduxForm({
     form: 'player',
     validate,
     initialValues: { platform: 'pc' },
     onSubmit
   })
-)(Home)
+)(ResearchProfile)

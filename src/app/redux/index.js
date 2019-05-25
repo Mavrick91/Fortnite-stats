@@ -1,19 +1,30 @@
-import { applyMiddleware, compose, createStore } from 'redux';
-import rootReducer from './reducers';
-import LogRocket from 'logrocket';
-import mySaga from 'app/sagas';
-import createSagaMiddleware from 'redux-saga';
+import { createBrowserHistory } from 'history'
+import { applyMiddleware, compose, createStore } from 'redux'
+import { routerMiddleware } from 'connected-react-router'
+import rootReducer from './reducers'
+import rootSaga from 'app/sagas'
+import LogRocket from 'logrocket'
+import createSagaMiddleware from 'redux-saga'
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const history = createBrowserHistory({
+  basename: ''
+})
 
-// create the saga middleware
-const sagaMiddleware = createSagaMiddleware();
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
-  rootReducer,
-  composeEnhancer(applyMiddleware(sagaMiddleware, LogRocket.reduxMiddleware())),
-);
+  rootReducer(history),
+  composeEnhancer(
+    applyMiddleware(
+      routerMiddleware(history),
+      sagaMiddleware,
+      LogRocket.reduxMiddleware()
+    )
+  )
+)
 
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(rootSaga)
 
-export default store;
+export default store
