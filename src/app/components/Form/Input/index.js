@@ -29,7 +29,7 @@ const ControlStyled = styled(Form.Control)`
 
 const renderInput = ({
   input,
-  meta: { touched, error },
+  meta: { error },
   placeholder
 }: CustomFieldProps) => (
   <React.Fragment>
@@ -49,7 +49,7 @@ const Input = ({ label, name, className, placeholder }: Props) => (
   <Form.Group className={className}>
     {label && <Form.Label>{label}</Form.Label>}
     {/* // $FlowFixMe */}
-    (<Field name={name} component={renderInput} placeholder={placeholder} />)
+    <Field name={name} component={renderInput} placeholder={placeholder} />
   </Form.Group>
 )
 

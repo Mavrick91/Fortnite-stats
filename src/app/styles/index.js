@@ -4,6 +4,7 @@ import burbank from 'app/ressources/fonts/Burbank.ttf'
 const GlobalStyle = createGlobalStyle`
 	html, body, #root {
 		height: 100%;
+		font-family: Arial, serif;
 	}
 	
 	#root {

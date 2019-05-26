@@ -17,8 +17,10 @@ const validate = values =>
     return acc
   }, {})
 
-const onSubmit = ({ platform, username }, _, props) =>
-  props.history.push(`/profile/${platform}/${username}`)
+const onSubmit = ({ platform, username }, _, { reset, history }) => {
+  reset()
+  history.push(`/profile/${platform}/${username}`)
+}
 
 export default compose(
   withRouter,
