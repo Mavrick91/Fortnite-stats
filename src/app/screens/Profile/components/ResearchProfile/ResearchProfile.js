@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import type { FormProps } from 'redux-form'
 import Input from 'app/components/Form/Input'
-import Radio from 'app/components/Form/Radio'
 import bgHeader from 'app/ressources/images/bg-header.jpg'
 
 const RowStyled = styled(Row)`
@@ -19,7 +18,7 @@ const RowStyled = styled(Row)`
 
 const InputStyled = styled(Input)`
   & > input {
-    font-family: 'burbank';
+    font-family: 'burbank', serif;
     font-size: 35px;
     padding: 15px 30px 10px;
     background-color: rgba(255, 255, 255, 0.5);
@@ -32,11 +31,6 @@ const InputStyled = styled(Input)`
     }
   }
 `
-const createOptions = [
-  { label: 'Pc', value: 'pc' },
-  { label: 'PS', value: 'psn' },
-  { label: 'Xbox', value: 'xb1' }
-]
 
 const ResearchProfile = ({ handleSubmit }: FormProps) => {
   return (
@@ -49,11 +43,6 @@ const ResearchProfile = ({ handleSubmit }: FormProps) => {
                 name='username'
                 placeholder='Enter your EPIC name...'
               />
-            </Col>
-          </Row>
-          <Row className='justify-content-center'>
-            <Col xs={3}>
-              <Radio name='platform' options={createOptions} />
             </Col>
           </Row>
         </Form>

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { isEmpty, pick } from 'ramda'
+import { path, pick } from 'ramda'
 import { getUserInfoPlayer } from 'app/services/profile/action'
 
 type Params = {
@@ -15,18 +15,20 @@ type Props = {
     params: Params
   },
   getUserInfoPlayer: Params => void,
-  player: Player
+  player: ?Player
 }
 
 const withPlayer = (Component: React.ComponentType<any>) => {
   class WithPlayerHOC extends React.Component<Props> {
     componentDidUpdate() {
       const { match, getUserInfoPlayer, player } = this.props
+      const username = path(['params', 'username'], match).toLowerCase()
+      const epicName = path(['epicUserHandle'], player).toLowerCase()
 
       if (
         this.hasCorrectParams(match.params) &&
-        !isEmpty(player) &&
-        match.params.username !== player.epicUserHandle.toLowerCase()
+        player &&
+        username !== epicName
       )
         this.fetchInfoPlayer(getUserInfoPlayer, match.params)
     }
@@ -49,7 +51,9 @@ const withPlayer = (Component: React.ComponentType<any>) => {
     }
 
     render() {
-      return <Component {...this.props} />
+      const { getUserInfoPlayer, ...restProps } = this.props
+
+      return <Component {...restProps} />
     }
   }
 
@@ -58,8 +62,7 @@ const withPlayer = (Component: React.ComponentType<any>) => {
   })
 
   const mapDispatchToProps = {
-    getUserInfoPlayer: (platform, username) =>
-      getUserInfoPlayer(platform, username)
+    getUserInfoPlayer
   }
 
   return connect(
