@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import avatar from 'app/ressources/images/avatar.png'
-import { compose, withState } from 'recompose'
 
 type Props = {
   player: Player,
@@ -50,6 +49,7 @@ const ItemNavigation = styled.div`
       line-height: 40px;
       ${isActive && 'border-bottom: 2px solid crimson'};
       color: ${isActive ? 'crimson' : 'white'};
+      user-select: none;
 
       &:hover {
         cursor: pointer;
@@ -63,7 +63,7 @@ const NavProfile = ({ player, activeNav, setActiveNav }: Props) => {
   return (
     <RowStyled noGutters>
       <Col>
-        <RowName className='px-3'>
+        <RowName className='px-3' noGutters>
           <Col className='d-flex align-items-center'>
             <AvatarPlayer src={avatar} />
             <NamePlayer>{player.epicUserHandle}</NamePlayer>
@@ -87,9 +87,4 @@ const NavProfile = ({ player, activeNav, setActiveNav }: Props) => {
   )
 }
 
-const decorate = compose(
-  // $FlowFixMe
-  withState('activeNav', 'setActiveNav', 'OVERVIEW')
-)
-
-export default decorate(NavProfile)
+export default NavProfile

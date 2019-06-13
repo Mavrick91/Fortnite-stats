@@ -3,7 +3,6 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware } from 'connected-react-router'
 import rootReducer from './reducers'
 import rootSaga from 'app/sagas'
-import LogRocket from 'logrocket'
 import createSagaMiddleware from 'redux-saga'
 
 export const history = createBrowserHistory({
@@ -20,7 +19,6 @@ const store = createStore(
     applyMiddleware(
       routerMiddleware(history),
       sagaMiddleware,
-      LogRocket.reduxMiddleware()
     )
   )
 )
