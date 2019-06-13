@@ -34,10 +34,10 @@ const InputStyled = styled(Input)`
 
 const ResearchProfile = ({ handleSubmit }: FormProps) => {
   return (
-    <RowStyled className='justify-content-center align-items-center'>
+    <RowStyled className='justify-content-center align-items-center' noGutters>
       <Col>
         <Form onSubmit={handleSubmit}>
-          <Row className='justify-content-center'>
+          <Row className='justify-content-center' noGutters>
             <Col xs={6}>
               <InputStyled
                 name='username'

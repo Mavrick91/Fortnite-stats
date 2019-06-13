@@ -20,23 +20,28 @@ type Props = {
 
 const withPlayer = (Component: React.ComponentType<any>) => {
   class WithPlayerHOC extends React.Component<Props> {
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
       const { match, getUserInfoPlayer, player } = this.props
-      const username = path(['params', 'username'], match).toLowerCase()
-      const epicName = path(['epicUserHandle'], player).toLowerCase()
 
-      if (
-        this.hasCorrectParams(match.params) &&
-        player &&
-        username !== epicName
-      )
-        this.fetchInfoPlayer(getUserInfoPlayer, match.params)
+      if (match && this.hasCorrectParams(match.params)) {
+        if (player) {
+          const prevPlatform = path(['params', 'platform'], prevProps.match).toLowerCase()
+          const currentPlatform = path(['params', 'platform'], match).toLowerCase()
+          const username = path(['params', 'username'], match).toLowerCase()
+          const epicName = path(['epicUserHandle'], player).toLowerCase()
+
+          if (username !== epicName || prevPlatform !== currentPlatform)
+            this.fetchInfoPlayer(getUserInfoPlayer, match.params)
+        } else {
+        	this.fetchInfoPlayer(getUserInfoPlayer, match.params)
+				}
+      }
     }
 
     componentDidMount() {
       const { match, getUserInfoPlayer } = this.props
 
-      if (this.hasCorrectParams(match.params))
+      if (match && this.hasCorrectParams(match.params))
         this.fetchInfoPlayer(getUserInfoPlayer, match.params)
     }
 
@@ -46,9 +51,7 @@ const withPlayer = (Component: React.ComponentType<any>) => {
       return !!(username && platform)
     }
 
-    fetchInfoPlayer = (getUserInfoPlayer, params) => {
-      getUserInfoPlayer(params)
-    }
+    fetchInfoPlayer = (getUserInfoPlayer, params) => getUserInfoPlayer(params)
 
     render() {
       const { getUserInfoPlayer, ...restProps } = this.props
