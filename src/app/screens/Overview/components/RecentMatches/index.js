@@ -121,12 +121,13 @@ const getInfoRight = match => ({
   kills: match.kills
 })
 
-function getFormattedTitle(placeTop: string, isWin: string): string {
+const getFormattedTitle = (placeTop: ?string, isWin: number): string => {
   if (isWin) return 'WINNER!'
   if (!placeTop) return 'DEFEAT'
 
-  const whatTop = placeTop.split('top').filter(value => value.length > 0)
-  return `TOP ${whatTop}`;
+  const whatTop = placeTop.split('top').filter(value => value.length > 0)[0]
+
+  return `TOP ${whatTop}`
 }
 
 const RecentMatches = ({ recentMatches }: Props) => {
@@ -162,21 +163,27 @@ const RecentMatches = ({ recentMatches }: Props) => {
           <div className='w-100'>
             {recentMatches.map(match => {
               let placeTop = null
-              const tops = pick(['top3', 'top5', 'top10', 'top6', 'top12', 'top25'], match)
+              const tops = pick(
+                ['top3', 'top5', 'top10', 'top6', 'top12', 'top25'],
+                match
+              )
               const top = Object.keys(tops).reduce((acc, key) => {
                 if (tops[key]) acc.push(key)
                 return acc
               }, [])
 
-              if (top.length >= 1)
-                placeTop = top[0];
-              
+              if (top.length >= 1) placeTop = top[0]
+
               const isWin = match.top1
               const formattedTitle = getFormattedTitle(placeTop, isWin)
               const infoRight = getInfoRight(match)
 
               return (
-                <WrapperContent key={match.id} isWin={isWin} placeTop={placeTop}>
+                <WrapperContent
+                  key={match.id}
+                  isWin={isWin}
+                  placeTop={placeTop}
+                >
                   <Value>{formattedTitle}</Value>
                   <div className='d-flex w-25 align-items-end'>
                     {Object.keys(infoRight).map(key => {

@@ -1,5 +1,5 @@
-import {compose, mapProps} from "recompose";
-import Overview from "./Overview";
+import { compose, mapProps } from 'recompose'
+import Overview from './Overview'
 
 const decorate = compose(
   mapProps(({ player }: Player) => {

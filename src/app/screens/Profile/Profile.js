@@ -9,17 +9,19 @@ import InfoProfile from './components/InfoProfile'
 import Overview from 'app/screens/Overview'
 import Matches from 'app/screens/Matches'
 
+type ActiveNav = 'OVERVIEW' | 'PROGRESS' | 'MATCHES'
+
 type Props = {
   player: ?Player,
-  activeNav: String,
-  setActiveNav: String => void
+  activeNav: ActiveNav,
+  setActiveNav: string => void
 }
 
 const WrapperSection = styled.div`
   margin-bottom: 23px;
 `
 
-const displaySection = (activeNav, player) => {
+const displaySection = (activeNav: ActiveNav, player: Player) => {
   switch (activeNav) {
     case 'OVERVIEW':
       return <Overview player={player} />
@@ -30,10 +32,10 @@ const displaySection = (activeNav, player) => {
   }
 }
 
-const Profile = ({ player, activeNav, setActiveNav }: Props) => {
-  return (
-    <Container fluid className='h-100 p-0'>
-      <ResearchProfile />
+const Profile = ({ player, activeNav, setActiveNav }: Props) => (
+  <Container fluid className='h-100 p-0'>
+    <ResearchProfile />
+    {player && (
       <InfoProfile player={player}>
         <NavProfile
           player={player}
@@ -42,8 +44,8 @@ const Profile = ({ player, activeNav, setActiveNav }: Props) => {
         />
         <WrapperSection>{displaySection(activeNav, player)}</WrapperSection>
       </InfoProfile>
-    </Container>
-  )
-}
+    )}
+  </Container>
+)
 
 export default Profile

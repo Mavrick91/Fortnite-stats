@@ -9,7 +9,7 @@ import avatar from 'app/ressources/images/avatar.png'
 type Props = {
   player: Player,
   activeNav: string,
-  setActiveNav: (any) => void
+  setActiveNav: any => void
 }
 
 const RowStyled = styled(Row)`
@@ -70,7 +70,7 @@ const NavProfile = ({ player, activeNav, setActiveNav }: Props) => {
           </Col>
         </RowName>
         <RowNavigation noGutters>
-          <Col className='d-flex'>
+          <Col className='d-flex' data-test='item-navigation'>
             {navigations.map(navigation => (
               <ItemNavigation
                 key={navigation}
