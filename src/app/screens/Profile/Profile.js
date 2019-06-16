@@ -7,6 +7,7 @@ import ResearchProfile from './components/ResearchProfile'
 import NavProfile from './components/NavProfile'
 import InfoProfile from './components/InfoProfile'
 import Overview from 'app/screens/Overview'
+import Matches from 'app/screens/Matches'
 
 type Props = {
   player: ?Player,
@@ -22,6 +23,8 @@ const displaySection = (activeNav, player) => {
   switch (activeNav) {
     case 'OVERVIEW':
       return <Overview player={player} />
+    case 'MATCHES':
+      return <Matches player={player} />
     default:
       return <div />
   }
