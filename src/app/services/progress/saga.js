@@ -11,7 +11,6 @@ import {
 function* fetchPlayerHistory(action) {
   const { accountId, mode, requestName } = action
   const { data } = yield call(getPlayerHistory, accountId, mode)
-  console.log('data -----> ', data)
 
   yield put(loaderAction.loading(requestName))
   if (!data.error) {

@@ -24,7 +24,6 @@
     "reselect": "^4.0.0",
     "styled-components": "^4.2.0"
   },
-  "proxy": "https://api.fortnitetracker.com/v1",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
