@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { path, pick } from 'ramda'
+import { pick } from 'ramda'
 import { getUserInfoPlayer } from 'app/services/profile/action'
 
 type Params = {
@@ -18,51 +18,28 @@ type Props = {
   player: ?Player
 }
 
-const withPlayer = (Component: React.ComponentType<any>) => {
-  class WithPlayerHOC extends React.Component<Props> {
-    componentDidUpdate(prevProps) {
-      const { match, getUserInfoPlayer, player } = this.props
-
-      if (match && this.hasCorrectParams(match.params)) {
-        if (player) {
-          const prevPlatform = path(['params', 'platform'], prevProps.match).toLowerCase()
-          const currentPlatform = path(['params', 'platform'], match).toLowerCase()
-          const username = path(['params', 'username'], match).toLowerCase()
-          const epicName = path(['epicUserHandle'], player).toLowerCase()
-
-          if (username !== epicName || prevPlatform !== currentPlatform)
-            this.fetchInfoPlayer(getUserInfoPlayer, match.params)
-        } else {
-        	this.fetchInfoPlayer(getUserInfoPlayer, match.params)
-				}
+function withPlayer(Component: React.ComponentType<any>) {
+  function WithPlayerHOC({ match, getUserInfoPlayer, player }: Props) {
+    React.useEffect(() => {
+      if (match && hasCorrectParams(match.params)) {
+        getUserInfoPlayer(match.params)
       }
-    }
+    }, [match, getUserInfoPlayer])
 
-    componentDidMount() {
-      const { match, getUserInfoPlayer } = this.props
-
-      if (match && this.hasCorrectParams(match.params))
-        this.fetchInfoPlayer(getUserInfoPlayer, match.params)
-    }
-
-    hasCorrectParams = (params: Params): Boolean => {
+    function hasCorrectParams(params: Params): Boolean {
       const { username, platform } = pick(['username', 'platform'], params)
 
       return !!(username && platform)
     }
 
-    fetchInfoPlayer = (getUserInfoPlayer, params) => getUserInfoPlayer(params)
-
-    render() {
-      const { getUserInfoPlayer, ...restProps } = this.props
-
-      return <Component {...restProps} />
-    }
+    return <Component player={player} />
   }
 
-  const mapStateToProps = state => ({
-    player: state.player
-  })
+  function mapStateToProps(state) {
+    return {
+      player: state.player
+    }
+  }
 
   const mapDispatchToProps = {
     getUserInfoPlayer

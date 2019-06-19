@@ -38,20 +38,5 @@ describe('Profile', () => {
     it('should render NavProfile component', () => {
       expect(wrapper2.find(NavProfile)).toHaveLength(1)
     })
-
-    describe('when activeNav is set', () => {
-      describe('activeNav === OVERVIEW', () => {
-        const wrapper3 = shallow(<Profile player={{}} activeNav='OVERVIEW' />)
-        it('should render component Overview', () => {
-          expect(wrapper3.find(Overview)).toHaveLength(1)
-        })
-      })
-      describe('activeNav === MATCHES', () => {
-        const wrapper4 = shallow(<Profile player={{}} activeNav='MATCHES' />)
-        it('should render component Matches', () => {
-          expect(wrapper4.find(Matches)).toHaveLength(1)
-        })
-      })
-    })
   })
 })

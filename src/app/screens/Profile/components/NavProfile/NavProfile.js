@@ -59,7 +59,7 @@ const ItemNavigation = styled.div`
 
 const navigations = ['OVERVIEW', 'PROGRESS', 'MATCHES']
 
-const NavProfile = ({ player, activeNav, setActiveNav }: Props) => {
+function NavProfile({ player, activeNav, setActiveNav }: Props) {
   return (
     <RowStyled noGutters>
       <Col>

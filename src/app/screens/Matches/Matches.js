@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { isEmpty } from 'ramda'
 import Card from 'app/components/Card'
@@ -48,47 +48,41 @@ const Wrapper = styled.div`
   margin-top: 25px;
 `
 
-class Matches extends Component {
-  componentDidMount() {
-    const { fetchAllMatches, player } = this.props
+function Matches({ fetchAllMatches, player, matches }: Props) {
+  React.useEffect(() => {
+    fetchAllMatches(player.accountId)
+  }, [player, fetchAllMatches])
 
-    if (player && fetchAllMatches) fetchAllMatches(player.accountId)
-  }
+  if (!matches || isEmpty(matches)) return null
 
-  render() {
-    const { matches } = this.props
+  return (
+    <Wrapper>
+      <Card
+        content={matches.map(match => {
+          const { isWin, title, infoRight, top } = getInfoMatch(match)
 
-    if (!matches || isEmpty(matches)) return null
-
-    return (
-      <Wrapper>
-        <Card
-          content={matches.map(match => {
-            const { isWin, title, infoRight, top } = getInfoMatch(match)
-
-            return (
-              <WrapperContent key={match.id} isWin={isWin} top={top}>
-                <Value>{title}</Value>
-                <div className='d-flex w-25 align-items-end'>
-                  {Object.keys(infoRight).map(key => {
-                    return (
-                      <InfoRight
-                        className='d-flex flex-column align-items-end'
-                        key={key}
-                      >
-                        <Label fz='.8'>{key.toUpperCase()}</Label>
-                        <Value>{infoRight[key]}</Value>
-                      </InfoRight>
-                    )
-                  })}
-                </div>
-              </WrapperContent>
-            )
-          })}
-        />
-      </Wrapper>
-    )
-  }
+          return (
+            <WrapperContent key={match.id} isWin={isWin} top={top}>
+              <Value>{title}</Value>
+              <div className='d-flex w-25 align-items-end'>
+                {Object.keys(infoRight).map(key => {
+                  return (
+                    <InfoRight
+                      className='d-flex flex-column align-items-end'
+                      key={key}
+                    >
+                      <Label fz='.8'>{key.toUpperCase()}</Label>
+                      <Value>{infoRight[key]}</Value>
+                    </InfoRight>
+                  )
+                })}
+              </div>
+            </WrapperContent>
+          )
+        })}
+      />
+    </Wrapper>
+  )
 }
 
 export default Matches
