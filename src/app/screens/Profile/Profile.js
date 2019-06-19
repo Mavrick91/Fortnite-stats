@@ -8,44 +8,47 @@ import NavProfile from './components/NavProfile'
 import InfoProfile from './components/InfoProfile'
 import Overview from 'app/screens/Overview'
 import Matches from 'app/screens/Matches'
-
-type ActiveNav = 'OVERVIEW' | 'PROGRESS' | 'MATCHES'
+import Progress from 'app/screens/Progress'
 
 type Props = {
-  player: ?Player,
-  activeNav: ActiveNav,
-  setActiveNav: string => void
+  player: ?Player
 }
 
 const WrapperSection = styled.div`
   margin-bottom: 23px;
 `
 
-const displaySection = (activeNav: ActiveNav, player: Player) => {
-  switch (activeNav) {
-    case 'OVERVIEW':
-      return <Overview player={player} />
-    case 'MATCHES':
-      return <Matches player={player} />
-    default:
-      return <div />
-  }
-}
+function Profile({ player }: Props) {
+  const [activeNav, setActiveNav] = React.useState('OVERVIEW')
 
-const Profile = ({ player, activeNav, setActiveNav }: Props) => (
-  <Container fluid className='h-100 p-0'>
-    <ResearchProfile />
-    {player && (
-      <InfoProfile player={player}>
-        <NavProfile
-          player={player}
-          setActiveNav={setActiveNav}
-          activeNav={activeNav}
-        />
-        <WrapperSection>{displaySection(activeNav, player)}</WrapperSection>
-      </InfoProfile>
-    )}
-  </Container>
-)
+  function displaySection() {
+    switch (activeNav) {
+      case 'OVERVIEW':
+        return <Overview player={player} />
+      case 'MATCHES':
+        return <Matches player={player} />
+      case 'PROGRESS':
+        return <Progress player={player} />
+      default:
+        return <div />
+    }
+  }
+
+  return (
+    <Container fluid className='h-100 p-0'>
+      <ResearchProfile />
+      {player && (
+        <InfoProfile player={player}>
+          <NavProfile
+            player={player}
+            setActiveNav={setActiveNav}
+            activeNav={activeNav}
+          />
+          <WrapperSection>{displaySection()}</WrapperSection>
+        </InfoProfile>
+      )}
+    </Container>
+  )
+}
 
 export default Profile

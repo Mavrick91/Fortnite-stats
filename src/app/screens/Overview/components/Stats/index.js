@@ -95,14 +95,14 @@ const COLORS = {
   '2': ['#197278', '#283D3B']
 }
 
-const getContent = stats => {
+function getContent(stats) {
   return pick(
     ['top1', 'kills', 'winRatio', 'kd', 'kpg', 'score', 'scorePerMatch'],
     stats
   )
 }
 
-const Stats = ({ stats }) => {
+function Stats({ stats }) {
   return (
     <WrapperCard>
       {Object.keys(stats).map((key, index) => {
@@ -134,7 +134,6 @@ const Stats = ({ stats }) => {
               </React.Fragment>
             }
             content={Object.values(contentToDisplay).map(
-              // $FlowFixMe
               ({ displayValue, label, rank }: TopWithPercent) => {
                 return (
                   <OneValue key={label}>

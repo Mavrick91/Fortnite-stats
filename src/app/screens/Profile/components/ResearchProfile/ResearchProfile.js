@@ -32,7 +32,7 @@ const InputStyled = styled(Input)`
   }
 `
 
-const ResearchProfile = ({ handleSubmit }: FormProps) => {
+function ResearchProfile({ handleSubmit }: FormProps) {
   return (
     <RowStyled className='justify-content-center align-items-center' noGutters>
       <Col>

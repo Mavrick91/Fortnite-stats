@@ -44,7 +44,7 @@ describe('withPlayer', () => {
         expect(wrapper.type()).not.toBe(null)
       })
 
-      it('should trigger action', () => {
+      it.only('should trigger action', () => {
         expect(store.getActions()).toEqual(
           expectedActions({ username, platform })
         )
@@ -114,12 +114,16 @@ describe('withPlayer', () => {
 
       describe("if it's different params", () => {
         it('should trigger action', () => {
-          wrapper3.setProps({ match: { params: { username: 'changed', platform } } })
+          wrapper3.setProps({
+            match: { params: { username: 'changed', platform } }
+          })
           expect(store2.getActions()).toEqual(
             expectedActions({ username: 'changed', platform })
           )
           store2.clearActions()
-          wrapper3.setProps({ match: { params: { username, platform: 'changed' } } })
+          wrapper3.setProps({
+            match: { params: { username, platform: 'changed' } }
+          })
           expect(store2.getActions()).toEqual(
             expectedActions({ username, platform: 'changed' })
           )

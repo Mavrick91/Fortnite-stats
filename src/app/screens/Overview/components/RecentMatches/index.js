@@ -82,7 +82,7 @@ const InfoRight = styled.div`
   width: 90px;
 `
 
-const getSubHeaderContent = (recentMatches: RecentMatchesType) => {
+function getSubHeaderContent(recentMatches: RecentMatchesType) {
   return recentMatches.reduce(
     (acc, match) => {
       acc['kills'] += match.kills
@@ -102,7 +102,7 @@ const getSubHeaderContent = (recentMatches: RecentMatchesType) => {
   )
 }
 
-const RecentMatches = ({ recentMatches }: Props) => {
+function RecentMatches({ recentMatches }: Props) {
   const subHeaderContent = getSubHeaderContent(recentMatches)
 
   return (
@@ -134,7 +134,6 @@ const RecentMatches = ({ recentMatches }: Props) => {
         content={
           <div className='w-100'>
             {recentMatches.map(match => {
-              console.log('match: ', match)
               const { isWin, title, infoRight, top } = getInfoMatch(match)
 
               return (

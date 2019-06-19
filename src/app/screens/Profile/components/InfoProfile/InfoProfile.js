@@ -13,7 +13,7 @@ const RowStyled = styled(Row)`
   background-color: #1f1f1f;
 `
 
-const InfoProfile = ({ children }: Props) => {
+function InfoProfile({ children }: Props) {
   return (
     <RowStyled className='justify-content-center' noGutters>
       <Col xs={10} className='mt-n5'>

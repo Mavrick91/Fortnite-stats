@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form'
 import { compose } from 'recompose'
 import { withRouter } from 'react-router-dom'
 
-const validate = values =>
+function validate(values) {
   Object.keys(values).reduce((acc, key) => {
     const value = values[key]
 
@@ -16,8 +16,9 @@ const validate = values =>
 
     return acc
   }, {})
+}
 
-const onSubmit = ({ platform, username }, _, { reset, history }) => {
+function onSubmit({ platform, username }, _, { reset, history }) {
   reset()
   history.push(`/profile/${platform}/${username}`)
 }
