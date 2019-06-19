@@ -10,7 +10,6 @@ import {
 function* fetchMatchesHistory(action) {
   const { requestName, accountId } = action
   const { data } = yield call(getPlayerMatchesHistory, accountId)
-  console.log('data -----> ', data)
 
   yield put(loaderAction.loading(requestName))
   if (!data.error) {
