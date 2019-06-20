@@ -19,7 +19,7 @@ const WrapperSection = styled.div`
 `
 
 function Profile({ player }: Props) {
-  const [activeNav, setActiveNav] = React.useState('OVERVIEW')
+  const [activeNav, setActiveNav] = React.useState('PROGRESS')
 
   function displaySection() {
     switch (activeNav) {

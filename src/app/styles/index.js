@@ -2,6 +2,10 @@ import { createGlobalStyle } from 'styled-components'
 import burbank from 'app/ressources/fonts/Burbank.ttf'
 
 const GlobalStyle = createGlobalStyle`
+	*, *:before, *:after {
+  	box-sizing: border-box;
+	}	
+
 	html, body, #root {
 		height: 100%;
 		font-family: Arial, serif;

@@ -3,10 +3,12 @@ import Progress from './Progress'
 import { connect } from 'react-redux'
 import { fetchProgressPlayer } from 'app/services/progress/action'
 
-const mapStateToProps = state => ({})
+function mapStateToProps(state) {
+  return state
+}
 
 const mapDispatchToProps = {
-	fetchProgressPlayer
+  fetchProgressPlayer
 }
 
 export default compose(
