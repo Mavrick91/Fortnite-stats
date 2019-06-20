@@ -25,13 +25,12 @@ const Header = styled.div`
 `
 
 const SubHeader = styled.div`
-  height: 65px;
   background-color: #363636;
   padding: 15px 20px;
   display: flex;
 
-  & > div {
-    margin-right: 15px;
+  & > div + div {
+    margin-left: 15px;
 `
 
 const Content = styled.div`

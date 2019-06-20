@@ -5,7 +5,7 @@ export const FETCH_HISTORICAL_FAILED = 'FETCH_HISTORICAL_FAILED'
 export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_HISTORICAL_SUCCEEDED:
-      return state
+      return action.data
 
     default:
       return state
