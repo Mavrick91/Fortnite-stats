@@ -57,7 +57,7 @@ const ItemNavigation = styled.div`
     `}
 `
 
-const navigations = ['OVERVIEW', 'PROGRESS', 'MATCHES']
+const navigations = ['OVERVIEW' /*, 'PROGRESS'*/, 'MATCHES']
 
 function NavProfile({ player, activeNav, setActiveNav }: Props) {
   return (

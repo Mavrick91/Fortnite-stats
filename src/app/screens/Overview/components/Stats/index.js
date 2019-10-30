@@ -103,11 +103,13 @@ function getContent(stats) {
 }
 
 function Stats({ stats }) {
+  console.log('stats', stats)
   return (
     <WrapperCard>
       {Object.keys(stats).map((key, index) => {
         const stat = stats[key]
         const contentToDisplay = getContent(stat)
+        console.log('stat', stat)
 
         return (
           <Card
@@ -119,18 +121,6 @@ function Stats({ stats }) {
                 <NumberMatches bgColor={COLORS[index][1]}>
                   {stat.matches.displayValue} {stat.matches.label}
                 </NumberMatches>
-              </React.Fragment>
-            }
-            subHeader={
-              <React.Fragment>
-                <div className='d-flex flex-column'>
-                  <Label>{stat.trnRating.label.toUpperCase()}</Label>
-                  <Value>{stat.trnRating.displayValue}</Value>
-                </div>
-                <div className='d-flex flex-column'>
-                  <Label>RANK</Label>
-                  <Value>#{formatNumber(stat.trnRating.rank)}</Value>
-                </div>
               </React.Fragment>
             }
             content={Object.values(contentToDisplay).map(

@@ -5,8 +5,8 @@ import styled from 'styled-components'
 import { Row, Col } from 'react-bootstrap'
 import PlaylistChoice from 'app/components/PlaylistChoice'
 import playlists from 'app/constants/playlist'
-import SoloTrend from './components/SoloTrend'
-import { translateMode } from 'app/utils'
+// import SoloTrend from './components/SoloTrend'
+// import { translateMode } from 'app/utils'
 
 type Props = {
   player: Player,
@@ -33,9 +33,8 @@ function Progress({ player, fetchProgressPlayer }: Props) {
       <PlaylistChoice setMode={setMode} playlistActive={mode} />
       <RowStyled noGutters>
         <Col xs={4}>
-          <SoloTrend mode={translateMode(mode)} />
+          {/*<SoloTrend mode={translateMode(mode)} />*/}
         </Col>
-        <Col xs={8}></Col>
       </RowStyled>
     </Wrapper>
   )
